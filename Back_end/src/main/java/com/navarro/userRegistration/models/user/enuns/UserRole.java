@@ -1,4 +1,4 @@
-package com.navarro.userRegistration.user;
+package com.navarro.userRegistration.models.user.enuns;
 
 public enum UserRole {
 
