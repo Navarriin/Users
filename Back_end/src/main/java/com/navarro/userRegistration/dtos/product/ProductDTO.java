@@ -1,4 +1,4 @@
-package com.navarro.userRegistration.dtos;
+package com.navarro.userRegistration.dtos.product;
 
 import com.navarro.userRegistration.models.product.Product;
 

@@ -1,6 +1,6 @@
 package com.navarro.userRegistration.controllers;
 
-import com.navarro.userRegistration.dtos.ProductDTO;
+import com.navarro.userRegistration.dtos.product.ProductDTO;
 import com.navarro.userRegistration.services.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/product")
+@RequestMapping("product")
 public class ProductController {
 
     private final ProductService productService;

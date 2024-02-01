@@ -1,6 +1,6 @@
-package com.navarro.userRegistration.dtos.mapper;
+package com.navarro.userRegistration.dtos.product.mapper;
 
-import com.navarro.userRegistration.dtos.ProductDTO;
+import com.navarro.userRegistration.dtos.product.ProductDTO;
 import com.navarro.userRegistration.models.product.Product;
 import org.springframework.stereotype.Component;
 

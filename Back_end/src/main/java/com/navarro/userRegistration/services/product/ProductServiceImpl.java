@@ -1,7 +1,7 @@
 package com.navarro.userRegistration.services.product;
 
-import com.navarro.userRegistration.dtos.ProductDTO;
-import com.navarro.userRegistration.dtos.mapper.ProductMapper;
+import com.navarro.userRegistration.dtos.product.ProductDTO;
+import com.navarro.userRegistration.dtos.product.mapper.ProductMapper;
 import com.navarro.userRegistration.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
