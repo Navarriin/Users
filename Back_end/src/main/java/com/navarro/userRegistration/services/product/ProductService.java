@@ -1,11 +1,11 @@
 package com.navarro.userRegistration.services.product;
 
-import com.navarro.userRegistration.models.product.Product;
+import com.navarro.userRegistration.dtos.ProductDTO;
 
 import java.util.List;
 
 public interface ProductService {
 
-    public List<Product> findAll();
-    public Product createProduct(Product body);
+    public List<ProductDTO> findAll();
+    public ProductDTO createProduct(ProductDTO body);
 }
