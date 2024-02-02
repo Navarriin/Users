@@ -1,13 +1,15 @@
 package com.navarro.userRegistration.services.product;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
 import com.navarro.userRegistration.dtos.product.ProductDTO;
 import com.navarro.userRegistration.dtos.product.mapper.ProductMapper;
 import com.navarro.userRegistration.repositories.ProductRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
