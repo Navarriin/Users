@@ -30,4 +30,9 @@ public class ProductServiceImpl implements ProductService{
     public ProductDTO createProduct(ProductDTO body) {
         return productMapper.toDTO(productRepository.save(productMapper.toEntity(body)));
     }
+
+    @Override
+    public void deleteProduct(String id) {
+        productRepository.delete(productRepository.findById(id).orElseThrow(NullPointerException::new));
+    }
 }
