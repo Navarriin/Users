@@ -1,5 +1,7 @@
 package com.navarro.userRegistration.controllers;
 
+import com.navarro.userRegistration.dtos.user.LoginResponseDTO;
+import com.navarro.userRegistration.infra.security.TokenService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,19 +24,26 @@ public class AuthenticationController {
 
     private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
+    private final TokenService tokenService;
 
-    public AuthenticationController(AuthenticationManager authenticationManager, UserRepository userRepository) {
+    public AuthenticationController(
+            AuthenticationManager authenticationManager,
+            UserRepository userRepository,
+            TokenService tokenService) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
+        this.tokenService = tokenService;
     }
 
     @PostMapping("login")
-    public ResponseEntity<Void> login(@RequestBody AuthorizationDTO data) {
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody AuthorizationDTO data) {
         UsernamePasswordAuthenticationToken usernamePassword =
                 new UsernamePasswordAuthenticationToken(data.login(), data.password());
         Authentication auth = this.authenticationManager.authenticate(usernamePassword);
 
-        return ResponseEntity.ok().build();
+        var token = tokenService.generateToken((User) auth.getPrincipal());
+
+        return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 
     @PostMapping("register")
