@@ -5,20 +5,22 @@ import org.springframework.stereotype.Component;
 import com.navarro.userRegistration.dtos.product.ProductDTO;
 import com.navarro.userRegistration.models.product.Product;
 
+import java.util.Objects;
+
 @Component
 public class ProductMapper {
 
     public ProductDTO toDTO(Product product) {
-        if(product == null) return null;
+        if(Objects.isNull(product)) return null;
 
         return new ProductDTO(product);
     }
 
     public Product toEntity(ProductDTO body) {
-        if(body == null) return null;
+        if(Objects.isNull(body)) return null;
 
         Product product = new Product();
-        if(body.id() != null) product.setId(body.id());
+        if(Objects.nonNull(body.id())) product.setId(body.id());
 
         product.setName(body.name());
         product.setPrice(body.price());

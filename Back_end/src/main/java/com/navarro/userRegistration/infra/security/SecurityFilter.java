@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Objects;
 
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
@@ -29,7 +30,7 @@ public class SecurityFilter extends OncePerRequestFilter {
             HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
             var token = this.recoverToken(request);
-            if(token != null) {
+            if(Objects.nonNull(token)) {
                 var login = tokenService.validateToken(token);
                 UserDetails user = userRepository.findByLogin(login);
 
@@ -41,7 +42,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     private String recoverToken (HttpServletRequest request) {
         var authHeader = request.getHeader("Authorization");
-        if(authHeader == null) return null;
+        if(Objects.isNull(authHeader)) return null;
         return authHeader.replace("Bearer ", "");
     }
 }

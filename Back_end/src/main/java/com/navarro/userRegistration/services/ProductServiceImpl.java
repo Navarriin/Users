@@ -1,4 +1,4 @@
-package com.navarro.userRegistration.services.product;
+package com.navarro.userRegistration.services;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,17 +24,11 @@ public class ProductServiceImpl implements ProductService{
     public List<ProductDTO> findAll() {
         return productRepository.findAll()
                 .stream().map(productMapper::toDTO)
-                .sorted((obj1, obj2) -> obj1.id().compareTo(obj2.id()))
                 .collect(Collectors.toList());
     }
 
     @Override
     public ProductDTO createProduct(ProductDTO body) {
         return productMapper.toDTO(productRepository.save(productMapper.toEntity(body)));
-    }
-
-    @Override
-    public void deleteProduct(String id) {
-        productRepository.delete(productRepository.findById(id).orElseThrow(NullPointerException::new));
     }
 }

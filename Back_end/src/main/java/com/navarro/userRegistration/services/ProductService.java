@@ -1,4 +1,4 @@
-package com.navarro.userRegistration.services.product;
+package com.navarro.userRegistration.services;
 
 import java.util.List;
 
@@ -9,7 +9,5 @@ public interface ProductService {
     public List<ProductDTO> findAll();
 
     public ProductDTO createProduct(ProductDTO body);
-
-    public void deleteProduct(String id);
 
 }
