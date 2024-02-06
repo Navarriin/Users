@@ -15,14 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.navarro.userRegistration.dtos.product.ProductDTO;
 import com.navarro.userRegistration.services.product.ProductService;
 
-import lombok.RequiredArgsConstructor;
-
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("product")
 public class ProductController {
 
     private final ProductService productService;
+
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @GetMapping
     @CrossOrigin(origins = "*", allowedHeaders = "*")

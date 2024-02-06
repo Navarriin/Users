@@ -22,17 +22,17 @@ import com.navarro.userRegistration.repositories.UserRepository;
 @RequestMapping("auth")
 public class AuthenticationController {
 
-    private final AuthenticationManager authenticationManager;
-    private final UserRepository userRepository;
     private final TokenService tokenService;
+    private final UserRepository userRepository;
+    private final AuthenticationManager authenticationManager;
 
     public AuthenticationController(
-            AuthenticationManager authenticationManager,
+            TokenService tokenService,
             UserRepository userRepository,
-            TokenService tokenService) {
-        this.authenticationManager = authenticationManager;
-        this.userRepository = userRepository;
+            AuthenticationManager authenticationManager) {
         this.tokenService = tokenService;
+        this.userRepository = userRepository;
+        this.authenticationManager = authenticationManager;
     }
 
     @PostMapping("login")

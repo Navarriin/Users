@@ -9,14 +9,16 @@ import com.navarro.userRegistration.dtos.product.ProductDTO;
 import com.navarro.userRegistration.dtos.product.mapper.ProductMapper;
 import com.navarro.userRegistration.repositories.ProductRepository;
 
-import lombok.RequiredArgsConstructor;
-
 @Service
-@RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService{
 
-    private final ProductRepository productRepository;
     private final ProductMapper productMapper;
+    private final ProductRepository productRepository;
+
+    public ProductServiceImpl(ProductRepository productRepository, ProductMapper productMapper) {
+        this.productMapper = productMapper;
+        this.productRepository = productRepository;
+    }
 
     @Override
     public List<ProductDTO> findAll() {
