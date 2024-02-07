@@ -28,6 +28,13 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
+    public ProductDTO getProductById(String id) {
+        return productRepository.findById(id)
+                .map(productMapper::toDTO)
+                .orElseThrow(NullPointerException::new);
+    }
+
+    @Override
     public ProductDTO createProduct(ProductDTO body) {
         return productMapper.toDTO(productRepository.save(productMapper.toEntity(body)));
     }

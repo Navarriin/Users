@@ -8,6 +8,8 @@ public interface ProductService {
 
     public List<ProductDTO> findAll();
 
+    public ProductDTO getProductById(String id);
+
     public ProductDTO createProduct(ProductDTO body);
 
 }
