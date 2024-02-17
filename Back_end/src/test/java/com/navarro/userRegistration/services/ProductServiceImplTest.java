@@ -12,7 +12,8 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Collections;
-import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -41,7 +42,7 @@ class ProductServiceImplTest {
     }
 
     @Test
-    void findAll() {
+    void findAllSuccess() {
         when(mapper.toDTO(product)).thenReturn(productDTO);
         when(repository.findAll()).thenReturn(Collections.singletonList(product));
 
@@ -53,4 +54,34 @@ class ProductServiceImplTest {
         verify(repository, times(1)).findAll();
         verify(mapper, times(1)).toDTO(product);
     }
+
+    @Test
+    void getProductByIdSuccess() {
+        when(mapper.toDTO(product)).thenReturn(productDTO);
+        when(repository.findById(product.getId())).thenReturn(Optional.ofNullable(product));
+
+        var result = assertDoesNotThrow(() -> service.getProductById(product.getId()));
+
+        assertNotNull(result);
+        assertEquals(productDTO, result);
+        verify(repository, times(1)).findById(product.getId());
+        verify(mapper, times(1)).toDTO(product);
+    }
+
+    @Test
+    void getProductByIdError() {
+        when(mapper.toDTO(product)).thenReturn(productDTO);
+        when(repository.findById(any())).thenReturn(Optional.empty());
+
+        assertThrows(NoSuchElementException.class, () -> service.getProductById(any()));
+    }
+
+    /*
+       @Override
+    public ProductDTO getProductById(String id) {
+        return productRepository.findById(id)
+                .map(productMapper::toDTO)
+                .orElseThrow(NullPointerException::new);
+    }
+     */
 }

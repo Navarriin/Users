@@ -1,6 +1,7 @@
 package com.navarro.userRegistration.services;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -31,7 +32,7 @@ public class ProductServiceImpl implements ProductService{
     public ProductDTO getProductById(String id) {
         return productRepository.findById(id)
                 .map(productMapper::toDTO)
-                .orElseThrow(NullPointerException::new);
+                .orElseThrow(NoSuchElementException::new);
     }
 
     @Override
