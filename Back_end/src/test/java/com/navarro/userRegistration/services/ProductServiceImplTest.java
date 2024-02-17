@@ -64,8 +64,8 @@ class ProductServiceImplTest {
 
         assertNotNull(result);
         assertEquals(productDTO, result);
-        verify(repository, times(1)).findById(product.getId());
         verify(mapper, times(1)).toDTO(product);
+        verify(repository, times(1)).findById(product.getId());
     }
 
     @Test
@@ -76,12 +76,27 @@ class ProductServiceImplTest {
         assertThrows(NoSuchElementException.class, () -> service.getProductById(any()));
     }
 
-    /*
-       @Override
-    public ProductDTO getProductById(String id) {
-        return productRepository.findById(id)
-                .map(productMapper::toDTO)
-                .orElseThrow(NullPointerException::new);
+    @Test
+    void createProductSuccess() {
+        when(mapper.toDTO(product)).thenReturn(productDTO);
+        when(repository.save(mapper.toEntity(productDTO))).thenReturn(product);
+
+        var result = assertDoesNotThrow(() -> service.createProduct(productDTO));
+
+        assertNotNull(result);
+        assertEquals(productDTO, result);
+        verify(mapper, times(1)).toDTO(product);
+        verify(repository, times(1)).save(mapper.toEntity(productDTO));
     }
-     */
+
+    @Test
+    void createProductError() {
+        when(mapper.toDTO(product)).thenReturn(productDTO);
+        when(repository.save(mapper.toEntity(productDTO))).thenReturn(null);
+
+        var result = service.createProduct(productDTO);
+
+        assertNull(result);
+    }
+
 }
